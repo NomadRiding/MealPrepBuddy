@@ -1,11 +1,13 @@
 import React from "react"
 import Layout from "../components/Layout"
-import "HomePage.css"
+import Search from "../components/Search"
+import recipes from "../components/RecipeList"
+import "./HomePage.css"
 
 export default function HomePage() {
   return (
     <Layout>
-      <div className="home-page"></div>
+      <Search recipes={recipes} />
     </Layout>
   )
 }

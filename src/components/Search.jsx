@@ -1,21 +1,30 @@
 import React from "react"
+import "../styles/Search.css"
 
-export default function Search() {
+export default function Search({ recipes }) {
   const [searchRecipe, setSearchRecipe] = React.useState("")
 
+  if (!recipes || recipes.length === 0) {
+    return <p>No recipes available.</p>
+  }
+
+  const filteredRecipes = recipes.filter((recipe) =>
+    recipe.name.toLowerCase().includes(searchRecipe.toLowerCase())
+  )
   const recipeList = filteredRecipes.map((recipe) => (
     <div key={recipe.id} className="recipe-item">
       <h3>{recipe.name}</h3>
       <p>{recipe.description}</p>
     </div>
   ))
-  const filteredRecipes = recipes.filter((recipe) =>
-    recipe.name.toLowerCase().includes(searchRecipe.toLowerCase())
-  )
 
   return (
     <div className="search-container">
+      <label htmlFor="search-input" style={{ display: "none" }}>
+        Search Recipes
+      </label>
       <input
+        id="search-input"
         type="text"
         placeholder="Search for a recipe..."
         value={searchRecipe}
